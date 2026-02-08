@@ -53,7 +53,7 @@ class Device {
     REBOOT = 1,
     APPLY_UPDATE = 2,
     // APPLY_CACHE was 3.
-    // APPLY_ADB_SIDELOAD was 4.
+    APPLY_ADB_SIDELOAD = 4,
     WIPE_DATA = 5,
     WIPE_CACHE = 6,
     REBOOT_BOOTLOADER = 7,
@@ -79,7 +79,7 @@ class Device {
   };
 
   explicit Device(RecoveryUI* ui);
-  virtual ~Device() {}
+  virtual ~Device();
 
   // Returns a raw pointer to the RecoveryUI object.
   virtual RecoveryUI* GetUI() {
@@ -88,9 +88,7 @@ class Device {
 
   // Resets the UI object to the given UI. Used to override the default UI in case initialization
   // failed, or we want a different UI for some reason. The device object will take the ownership.
-  virtual void ResetUI(RecoveryUI* ui) {
-    ui_.reset(ui);
-  }
+  virtual void ResetUI(RecoveryUI* ui);
 
   // Called before any mode started up, to bring up network.
   virtual void InitDevice() {}
